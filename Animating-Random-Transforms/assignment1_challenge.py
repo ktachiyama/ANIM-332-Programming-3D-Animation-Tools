@@ -10,10 +10,10 @@ import maya.cmds
 import random
 
 # initialize start and end keyframe times
-startTime = maya.cmds.playbackOptions(query=True, min=True)
-endTime = maya.cmds.playbackOptions(query=True, max=True)
+start_time = maya.cmds.playbackOptions(query=True, min=True)
+end_time = maya.cmds.playbackOptions(query=True, max=True)
 
-maya.cmds.currentTime(startTime)
+maya.cmds.currentTime(start_time)
 
 
 def rand_translate_val(): return random.randint(-10, 10)
@@ -60,7 +60,7 @@ for s in shapes_go_whoo:
     # set keyframe of shape
     maya.cmds.setKeyframe(s)
 
-    maya.cmds.currentTime(random.randint(startTime, endTime))
+    maya.cmds.currentTime(random.randint(start_time, end_time))
 
     # randomly assign 3 attributes to a shape
     for i in range(1, 3):
@@ -69,4 +69,4 @@ for s in shapes_go_whoo:
 
     maya.cmds.setKeyframe(s)
 
-maya.cmds.currentTime(startTime)
+maya.cmds.currentTime(start_time)
