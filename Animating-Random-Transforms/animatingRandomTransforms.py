@@ -1,7 +1,7 @@
 '''
 Krysten Tachiyama
 
-This script randomly spawns shapes and randomly transforms 
+This script creates a set of shapes and randomly transforms them
 over random times. To see this happen, simply run the script
 in Maya.
 '''
