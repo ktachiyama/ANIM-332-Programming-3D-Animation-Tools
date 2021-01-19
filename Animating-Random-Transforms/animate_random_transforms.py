@@ -18,7 +18,7 @@ maya.cmds.currentTime(startTime)
 
 def rand_translate_val(): return random.randint(-10, 10)
 def rand_rotate_val(): return random.randint(0, 180)
-def rand_scale(): return random.randint(1, 3)
+def rand_scale_val(): return random.randint(1, 3)
 
 
 # list of shapes
@@ -34,6 +34,7 @@ for i in range(0, 3):
 
 # randomly initialize position of shapes
 for s in shapes_go_whoo:
+    print(s)
     maya.cmds.setAttr(s + ".translateX", rand_translate_val())
     maya.cmds.setAttr(s + ".translateY", rand_translate_val())
     maya.cmds.setAttr(s + ".translateZ", rand_translate_val())
@@ -47,9 +48,9 @@ for s in shapes_go_whoo:
     maya.cmds.currentTime(random.randint(startTime, endTime))
 
     # randomly scale, translate, and rotate shape
-    maya.cmds.setAttr(s + ".scaleX", rand_scale())
-    maya.cmds.setAttr(s + ".scaleY", rand_scale())
-    maya.cmds.setAttr(s + ".scaleZ", rand_scale())
+    maya.cmds.setAttr(s + ".scaleX", rand_scale_val())
+    maya.cmds.setAttr(s + ".scaleY", rand_scale_val())
+    maya.cmds.setAttr(s + ".scaleZ", rand_scale_val())
 
     maya.cmds.setAttr(s + ".translateX", rand_translate_val())
     maya.cmds.setAttr(s + ".translateY", rand_translate_val())
