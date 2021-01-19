@@ -1,12 +1,15 @@
 '''
 Krysten Tachiyama
 
-This script randomly 
+This script randomly spawns shapes and randomly transforms 
+over random times. To see this happen, simply run the script
+in Maya.
 '''
 
 import maya.cmds
 import random
 
+# initialize start and end keyframe times
 startTime = maya.cmds.playbackOptions(query=True, min=True)
 endTime = maya.cmds.playbackOptions(query=True, max=True)
 
@@ -18,8 +21,10 @@ def rand_rotate_val(): return random.randint(0, 180)
 def rand_scale(): return random.randint(1, 3)
 
 
+# list of shapes
 shapes_go_whoo = []
 
+# create shapes and append to shapes list
 for i in range(0, 3):
     shapes_go_whoo.append(maya.cmds.polyCube()[0])
     shapes_go_whoo.append(maya.cmds.polySphere()[0])
@@ -27,6 +32,7 @@ for i in range(0, 3):
     shapes_go_whoo.append(maya.cmds.polyTorus()[0])
     shapes_go_whoo.append(maya.cmds.polyCylinder()[0])
 
+# randomly initialize position of shapes
 for s in shapes_go_whoo:
     maya.cmds.setAttr(s + ".translateX", rand_translate_val())
     maya.cmds.setAttr(s + ".translateY", rand_translate_val())
@@ -35,11 +41,12 @@ for s in shapes_go_whoo:
 maya.cmds.select(cl=True)
 
 for s in shapes_go_whoo:
-
+    # set keyframe of shape
     maya.cmds.setKeyframe(s)
 
     maya.cmds.currentTime(random.randint(startTime, endTime))
 
+    # randomly scale, translate, and rotate shape
     maya.cmds.setAttr(s + ".scaleX", rand_scale())
     maya.cmds.setAttr(s + ".scaleY", rand_scale())
     maya.cmds.setAttr(s + ".scaleZ", rand_scale())
