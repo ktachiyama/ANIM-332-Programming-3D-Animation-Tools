@@ -71,6 +71,11 @@ def connect_joints(src_joints_list, dst_joints_list, dst_ns):
             maya.cmds.parentConstraint(s, dst_joint, mo=True)
 
 
+def save_file(file_path):
+    ''' Saves the current scene at the location of file_path'''
+    maya.cmds.file(rename = file_path)
+    maya.cmds.file(save = True, f = True)
+
 
 ##############  End of Helper Functions  ###############
 
@@ -124,11 +129,11 @@ def batch_animation(rig_path, anim_path, new_file_path):
     maya.cmds.file(anim_path, rr=True)
 
     # Save file
-    saveFile(new_file_path)
+    save_file(new_file_path)
                       
 
 if __name__ == '__main__':
-    # Pleas excuse the obnoxiously long paths
+    # Please excuse the obnoxiously long paths
     rig_path = r'C:\Users\k_tac\OneDrive\Documents\LMU\ANIM-332-Programming-3D-Animation-Tools\Assignments\Bake-Animations\files\character.mb'.replace(
         '\\', '/')
     anim_path = r'C:\Users\k_tac\OneDrive\Documents\LMU\ANIM-332-Programming-3D-Animation-Tools\Assignments\Bake-Animations\files\animations\char_01_01.ma'.replace(
