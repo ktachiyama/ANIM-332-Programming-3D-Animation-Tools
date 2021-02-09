@@ -1,3 +1,12 @@
+'''
+Krysten Tachiyama
+
+Make sure to add this file to your Maya scripts folder so Maya can find it.
+
+This script bakes an animation onto a given skeleton rig.
+To run, call batch_animations() with the appropriate arguments.
+'''
+
 import maya.cmds
 import os
 
@@ -122,7 +131,6 @@ def apply_animation(rig_path, anim_path, save_dir):
 
     # Save file
     new_filename = os.path.join(save_dir, 'character_{}'.format(anim_ns))
-    print(new_filename)
 
     save_file(new_filename)
 

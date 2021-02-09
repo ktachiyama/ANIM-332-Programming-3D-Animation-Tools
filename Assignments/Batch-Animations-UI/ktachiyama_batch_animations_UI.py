@@ -1,7 +1,20 @@
-from apply_batch_anim import batch_animations
+'''
+Krysten Tachiyama
+
+This script provides the user with a User Interface tool that 
+allows them to batch a series of animation files onto a character 
+rig and save the connected animations to a specified directory.
+
+Make sure the file apply_batch_animations_MEL is added to your]
+Maya scripts so the file can be properly imported. Then, send this 
+code to Maya to run.
+'''
+
+from apply_batch_animations_MEL import batch_animations
 from PySide2 import QtCore, QtWidgets, QtGui
 from shiboken2 import wrapInstance
 import maya.OpenMayaUI
+import os
 
 
 def get_maya_window():
@@ -13,7 +26,7 @@ def get_maya_window():
     return wrapInstance(long(maya_window_ptr), QtWidgets.QWidget)
 
 
-class BatchAnimDialogue(QtWidgets.QDialog):
+class BatchAnimDialog(QtWidgets.QDialog):
 
     # constructor
     def __init__(self):
@@ -22,7 +35,7 @@ class BatchAnimDialogue(QtWidgets.QDialog):
         maya_main = get_maya_window()
 
         # parent dialog to parent window
-        super(BatchAnimDialogue, self).__init__(maya_main)
+        super(BatchAnimDialog, self).__init__(maya_main)
 
         # Set title, height, and width of UI box
         self.setWindowTitle('Batch Animation Onto Character')
@@ -64,31 +77,37 @@ class BatchAnimDialogue(QtWidgets.QDialog):
     def create_layouts(self):
         self.main_layout = QtWidgets.QVBoxLayout(self)
 
+        # character file input layout
         self.char_layout = QtWidgets.QHBoxLayout(self)
         self.char_layout.addWidget(self.char_file_text)
         self.char_layout.addWidget(self.char_file_input)
         self.char_layout.addWidget(self.char_file_input_btn)
 
+        # animation directory input layout
         self.anim_layout = QtWidgets.QHBoxLayout(self)
         self.anim_layout.addWidget(self.anim_file_text)
         self.anim_layout.addWidget(self.anim_file_input)
         self.anim_layout.addWidget(self.anim_file_input_btn)
 
+        # save directory input layout
         self.save_layout = QtWidgets.QHBoxLayout(self)
         self.save_layout.addWidget(self.save_file_text)
         self.save_layout.addWidget(self.save_file_input)
         self.save_layout.addWidget(self.save_file_input_btn)
 
+        # batch_btn layout
         self.btn_layout = QtWidgets.QHBoxLayout(self)
         self.btn_layout.addWidget(self.batch_btn)
 
+        # add all layouts to main window
         self.main_layout.addLayout(self.char_layout)
         self.main_layout.addLayout(self.anim_layout)
         self.main_layout.addLayout(self.save_layout)
         self.main_layout.addLayout(self.btn_layout)
 
     def browse_char_path(self):
-        path = QtWidgets.QFileDialog.getOpenFileName(self)[0]
+        path = QtWidgets.QFileDialog.getOpenFileName(
+            self, self.tr("Select File"), "", self.tr("Maya Binary (*.mb);;Maya (*.ma *.mb);;Maya ASCII (*.ma);;All Files(*.*)"))[0]
         if path:
             self.char_file_input.setText(path)
 
@@ -102,7 +121,9 @@ class BatchAnimDialogue(QtWidgets.QDialog):
         if path:
             self.save_file_input.setText(path)
 
+    # calls batch_animations() and then closes dialog
     def batch_animation(self):
+
         char_dir = self.char_file_input.text()
         anim_dir = self.anim_file_input.text()
         save_dir = self.save_file_input.text()
@@ -110,6 +131,7 @@ class BatchAnimDialogue(QtWidgets.QDialog):
         batch_animations(char_dir, anim_dir, save_dir)
         self.close()
 
+    # connect buttons to actions
     def create_connections(self):
         self.char_file_input_btn.clicked.connect(self.browse_char_path)
         self.anim_file_input_btn.clicked.connect(self.browse_anim_dir)
@@ -125,5 +147,5 @@ if __name__ == '__main__':
     except:
         pass
 
-    dialog = BatchAnimDialogue()
+    dialog = BatchAnimDialog()
     dialog.show()

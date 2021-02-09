@@ -130,35 +130,23 @@ def apply_animation(anim_file, char_file, save_dir):
     # Save files
     anim_filename = os.path.split(anim_file)[1]
     renamed_file = os.path.join(
-        save_dir, 'characterrr_{}'.format(anim_filename))
+        save_dir, 'character_{}'.format(anim_filename))
 
     pymel.core.system.renameFile(renamed_file)
     pymel.core.system.saveFile(save=True, f=True)
 
 
-def batch_animations():
+def batch_animations(char_location, anim_location, save_dir):
     '''
     Defines the locations of the animations, character rig, and where the 
     applied animations will be saved. Then loops through the folder that 
     contains the animations and sends the animation, rig, and save directory
     to apply_animations() to be applied and saved.
     '''
-    # File of character rig
-    char_location = 'C:/Users/k_tac/OneDrive/Documents/LMU/ANIM-332-Programming-3D-Animation-Tools/Assignments/MEL-Bake-Animations/character.mb'
-
-    # Location of folder containing all the animations that will be applied to the rig
-    anim_location = 'C:/Users/k_tac/OneDrive/Documents/LMU/ANIM-332-Programming-3D-Animation-Tools/Assignments/MEL-Bake-Animations/animations'
 
     anim_files = [os.path.join(anim_location, f) for f in os.listdir(
-        anim_location) if os.path.exists(os.path.join(anim_location, f))]
-
-    # location where the applied animations will be saved
-    save_dir = 'C:/Users/k_tac/OneDrive/Documents/LMU/ANIM-332-Programming-3D-Animation-Tools/Assignments/MEL-Bake-Animations/save_here'
+        anim_location) if (os.path.exists(os.path.join(anim_location, f)) and f.endswith('.ma'))]
 
     # For each animation file in anim_files, apply the animation to the character and save
     for a in anim_files:
         apply_animation(a, char_location, save_dir)
-
-
-if __name__ == '__main__':
-    batch_animations()
