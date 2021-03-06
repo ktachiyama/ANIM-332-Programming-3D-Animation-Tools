@@ -1,6 +1,7 @@
 .mypy_cache
 .vscode
 
+sample_files/
 Classwork/
 
 # Files from wk02
@@ -16,3 +17,7 @@ Assignments/MEL-Bake-Animations/character.mb
 
 # Files from wk04
 Assignments/Batch-Animations-UI/save_here/
+Assignments/Batch-Animations-UI/__pycache__/apply_batch_animations_MEL.cpython-39.pyc
+
+# Research paper word doc
+Research Paper/ANIM 332 Research Paper.docx

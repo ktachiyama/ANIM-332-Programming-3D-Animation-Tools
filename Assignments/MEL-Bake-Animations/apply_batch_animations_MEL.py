@@ -1,3 +1,13 @@
+'''
+Krysten Tachiyama
+
+This script bakes an animation onto a given skeleton rig.
+
+To run, input the paths (directory including file name) of 
+the animation and rig as well as the path to where you want
+the new scene to be saved. Then execute the code in Maya.
+'''
+
 import pymel.core
 import os
 
@@ -119,8 +129,7 @@ def apply_animation(anim_file, char_file, save_dir):
 
     # Save files
     anim_filename = os.path.split(anim_file)[1]
-    renamed_file = os.path.join(
-        save_dir, 'characterrr_{}'.format(anim_filename))
+    renamed_file = os.path.join(save_dir, 'character_{}'.format(anim_filename))
 
     pymel.core.system.renameFile(renamed_file)
     pymel.core.system.saveFile(save=True, f=True)
