@@ -34,6 +34,7 @@ def asset_data(filename='', destination='', options=None):
 
     return task
 
+
 def create_directory_if_no_exist(path):
     ''' 
     Checks if path exist, creates it if it doesn't
@@ -45,6 +46,7 @@ def create_directory_if_no_exist(path):
     if not directory_exists(path):
         return unreal.EditorAssetLibrary.make_directory(directory_path=path)
 
+    
 def create_material_to_path_dic(materials_path_list):
     '''
     Creates a dictionary of material name keys to their corresponding path values
@@ -63,6 +65,7 @@ def create_material_to_path_dic(materials_path_list):
         result.update([(mat_name, m)])
 
     return result
+
 
 def directory_exists(path):
     ''' 
@@ -93,6 +96,7 @@ def execute_import_tasks_and_get_import_paths(tasks=[]):
             imported_asset_paths.append(path)
     return imported_asset_paths
 
+
 def get_fbx_from_folder(folder_path):
     ''' 
     Creates a list of fbx file paths from the given folder_path 
@@ -108,6 +112,7 @@ def get_fbx_from_folder(folder_path):
         folder_path) if (os.path.exists(os.path.join(folder_path, f)) and f.endswith('.fbx'))]
 
     return fbx_files
+
 
 def replace_meshes(asset_path_list, matName_to_path, set_to_closest_mat):
     '''
@@ -173,6 +178,7 @@ def replace_meshes(asset_path_list, matName_to_path, set_to_closest_mat):
 
             index += 1
 
+            
 def static_mesh_import_options():
     '''
     Sets the import options for the static mesh assets
@@ -194,6 +200,7 @@ def static_mesh_import_options():
 
     return options
 
+
 '''
     def skeletal_mesh_import_options():
         options = unreal.FbxImportUI()
@@ -207,6 +214,7 @@ def static_mesh_import_options():
 
         return options
 '''
+
 
 def import_assets(fbx_directory, save_directory, materials_path_list, set_to_closest_mat):
     '''
