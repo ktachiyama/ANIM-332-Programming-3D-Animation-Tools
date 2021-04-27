@@ -34,7 +34,6 @@ def asset_data(filename='', destination='', options=None):
 
     return task
 
-
 def create_directory_if_no_exist(path):
     ''' 
     Checks if path exist, creates it if it doesn't
