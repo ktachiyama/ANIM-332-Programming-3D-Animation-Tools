@@ -2,7 +2,6 @@ import unreal
 import os
 from difflib import SequenceMatcher
 
-
 '''
 run these commands in ue4 outlook to reimport script without restarting unreal
 
@@ -11,8 +10,6 @@ import asset_importer
 reload(asset_importer)
 '''
 
-
- 
 def asset_data(filename='', destination='', options=None):
     ''' 
     Defines the data for the assets being imported 
@@ -49,7 +46,6 @@ def create_directory_if_no_exist(path):
     if not directory_exists(path):
         return unreal.EditorAssetLibrary.make_directory(directory_path=path)
 
-
 def create_material_to_path_dic(materials_path_list):
     '''
     Creates a dictionary of material name keys to their corresponding path values
@@ -69,7 +65,6 @@ def create_material_to_path_dic(materials_path_list):
 
     return result
 
-
 def directory_exists(path):
     ''' 
     Returns True if path exists, False otherwise
@@ -79,7 +74,6 @@ def directory_exists(path):
     '''
 
     return unreal.EditorAssetLibrary.does_directory_exist(directory_path=path)
-
 
 
 def execute_import_tasks_and_get_import_paths(tasks=[]):
@@ -100,7 +94,6 @@ def execute_import_tasks_and_get_import_paths(tasks=[]):
             imported_asset_paths.append(path)
     return imported_asset_paths
 
-
 def get_fbx_from_folder(folder_path):
     ''' 
     Creates a list of fbx file paths from the given folder_path 
@@ -116,7 +109,6 @@ def get_fbx_from_folder(folder_path):
         folder_path) if (os.path.exists(os.path.join(folder_path, f)) and f.endswith('.fbx'))]
 
     return fbx_files
-
 
 def replace_meshes(asset_path_list, matName_to_path, set_to_closest_mat):
     '''
@@ -181,7 +173,6 @@ def replace_meshes(asset_path_list, matName_to_path, set_to_closest_mat):
                 asset.set_material(index, mat)
 
             index += 1
-
 
 def static_mesh_import_options():
     '''
